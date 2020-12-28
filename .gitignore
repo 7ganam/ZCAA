@@ -1,0 +1,23 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/frontend/zcaa/node_modules
+/frontend/zcaa/.pnp
+/frontend/zcaa.pnp.js
+
+# testing
+/frontend/zcaa/coverage
+
+# production
+/frontend/zcaa/build
+
+# misc
+/frontend/zcaa/.DS_Store
+/frontend/zcaa/.env.local
+/frontend/zcaa/.env.development.local
+/frontend/zcaa/.env.test.local
+/frontend/zcaa/.env.production.local
+
+/frontend/zcaa/npm-debug.log*
+/frontend/zcaa/yarn-debug.log*
+/frontend/zcaa/yarn-error.log*
