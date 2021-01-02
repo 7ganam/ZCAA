@@ -1,3 +1,7 @@
+
+require('dotenv').config()
+//adding my config files 
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -19,16 +23,29 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// app.use('/', indexRouter);
+// app.use('/users', usersRouter);
+if (process.env.NODE_ENV === "production") {
+  console.log("in")
+  app.use(express.static(path.join(__dirname, './frontend/build')));
+  app.get('*', (req, res) => {
+    var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+    console.log("fullUrl")
+    console.log({ fullUrl })
+    res.sendFile('./frontend/build/index.html', { root: __dirname });
+    // res.sendFile(path.resolve(__dirname, 'front_end', 'build', 'index.html'))
+  }
+  )
+}
+
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
