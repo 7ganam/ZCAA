@@ -1,0 +1,11 @@
+#about_header{
+    font-family: Philosopher;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 48px;
+    line-height: 125.5%;
+    /* or 60px */
+    text-transform: uppercase;
+    /* primary400 */
+    color: #0091AC;
+}
