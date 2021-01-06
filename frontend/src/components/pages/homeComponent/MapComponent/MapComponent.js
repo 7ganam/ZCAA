@@ -36,7 +36,7 @@ const Map = () => {
         setTimeout(() => {
             const fetched_countries = [
                 { code: "DE", country: "Germany", count: 7 },
-                { code: "RU", country: "Russian Federation", count: 10 },
+                { code: "RU", country: "Russia", count: 10 },
                 { code: "US", country: "United States", count: 22 },
                 { code: "FR", country: "France", count: 4 },
                 { code: "IT", country: "Italy", count: 33 },
@@ -55,7 +55,7 @@ const Map = () => {
         const markers = countries.map((entry) => {
             // console.log(data)
             let obj = data.find(obj => obj.country == entry.country);
-            let marker = { latLng: [obj.latitude, obj.longitude], name: `${entry.count} aluminies in ${obj.country}  ` }
+            let marker = { latLng: [obj.latitude, obj.longitude], name: `${entry.count} Alumini in ${obj.country}  ` }
             return marker
 
         })
@@ -68,8 +68,10 @@ const Map = () => {
 
 
     const tip_handler = (e, el, code) => {
-        console.log(el)
-
+        // console.log(el)
+        let country_data = countries.find((country) => { return (country.code == code) }) // if the country hovered dont' have alumini this will be undefined
+        console.log({ country_data })
+        // let number_of_alum = countries[code]
         let hoverd_country_name = el.html();
         if (el.html() === "Israel") {
             hoverd_country_name = "Palestine";
@@ -77,11 +79,11 @@ const Map = () => {
 
         let hovered_country = countries.find(c => c.code == code);
         //  el.html(el.html()+' (GDP - '+countries[code]+')');
-        if (!!hovered_country) {
-            el.html(hoverd_country_name);
+        if (!!country_data) {
+            el.html(country_data.count + ' Alumini in ' + hoverd_country_name);
         }
         else {
-            el.html(el.html());
+            el.html(hoverd_country_name);
         }
     }
 

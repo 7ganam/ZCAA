@@ -34,6 +34,7 @@
 .brand_title
 {
     font-family: 'Noto Sans', sans-serif;
+    font-family: Cairo;
     position: relative;
     top: 7px;
     color: black;
@@ -43,6 +44,8 @@
 
 .nav-link{
     font-family: 'Noto Sans', sans-serif;
+    font-family: Cairo;
+
     font-size: 20px;
     margin-right: 20px;
     text-transform: uppercase;
