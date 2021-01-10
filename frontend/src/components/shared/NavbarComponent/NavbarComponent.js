@@ -26,40 +26,6 @@ const NavbarComponent = (props) => {
 
     const toggle = () => setIsOpen(!isOpen);
 
-
-    const sign_up = async event => {
-
-        event.preventDefault();
-        try {
-
-
-            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/auth/google`, {
-                credentials: 'same-origin',
-                method: 'get',
-            })
-
-            const response_json_content = await response.json()
-            if (!response.ok) {
-                this.setState({ fetch_error: true })
-                throw new Error(response_json_content.message || "can't fetch data ... could be a connection error or unhandled back end error");
-            }
-            console.log({ response_json_content })
-
-        } catch (err) {
-            console.log(err);
-        }
-
-    };
-
-    useEffect(
-        () => {
-            console.log(process.env.REACT_APP_BACKEND_URL)
-            console.log('process.env.REACT_APP_BACKEND_URL')
-        },
-        [],
-    )
-
-
     return (
         <React.Fragment>
             <Container className="d-flex justify-content-center">

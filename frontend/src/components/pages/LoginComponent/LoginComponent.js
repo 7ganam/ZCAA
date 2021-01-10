@@ -1,39 +1,30 @@
-import React, { useState, useCallback } from 'react'
+// login proccess flow : 
+// on submit the form sends the data back to this login componenet and trigers its show modal function
+// on google button clicked the button sends the google credetintals to the login copnente and trigers its send data function
+// login in component sends the data to the back end and shows loading component untill the process finishs
+
+
+import React, { useState, useCallback, useEffect } from 'react'
 import { Container } from 'reactstrap'
-import GooglebtnComponent from './GooglebtnComponent'
+import GooglebtnComponent from './GooglebtnComponent/GooglebtnComponent'
 import "./LoginComponent.css"
 import zc_logo from './zc_logo.png'
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import FormComponent from './FormComponent/FormComponent'
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+
 export default function LoginComponent() {
-    let [gdata, set_gdata] = useState(null)
-    const handle_click = useCallback(
-        (request_object) => {
-            set_gdata(request_object);
-        }, []);
+
     return (
-        <div style={{ height: "300px" }}>
-            {!gdata && <Container fluid style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                <div id="login_card" style={{}}>
-                    <img style={{ width: "200px", height: "auto", opacity: "0.5", marginTop: "50px" }} src={zc_logo} alt="logo" />
-                    <div id="login_disclimare" >
-                        <span className="font1">You need to have a </span>
-                        <span className="font2">zewailcity email </span>
-                        <span className="font1">to apply </span>
-                    </div>
-                    <div style={{ marginTop: "10px" }}>
-                        <GooglebtnComponent onclick={handle_click} />
-                    </div>
-
-                </div>
-
-            </Container>}
-            {gdata &&
-                <Container fluid>
-                    <Container>
-                        <div>form</div>
-                    </Container>
+        <React.Fragment>
+            {
+                // gdata &&
+                <Container fluid style={{ background: "rgba(164, 223, 234, 0.15)", minHeight: "80vh" }}>
+                    <FormComponent />
                 </Container>
             }
-        </div>
+        </React.Fragment>
     )
 }

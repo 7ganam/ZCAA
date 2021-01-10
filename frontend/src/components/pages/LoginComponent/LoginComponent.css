@@ -1,7 +1,8 @@
 #login_card{
-    margin-top: 50px ;
-    height: 460px;
-    width: 75vw;
+    margin-top: 0px ;
+
+    min-height: 460px;
+    min-width: 100%;
     display: flex;
     /* justify-content: center; */
     align-items: center ;
@@ -10,6 +11,7 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 11px;
     flex-direction: column;
+    background-color: white;
 }
 
 .font1{

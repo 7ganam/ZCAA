@@ -83,7 +83,7 @@ export default function AboutComponent() {
 
                 </Row>
             </Container>
-            <Container id="members_container" className="">
+            <Container id="members_container" className="" style={{ marginBottom: "100px" }}>
                 <Row id="header_row">
                     <Col xs="12" className="" >
                         <div

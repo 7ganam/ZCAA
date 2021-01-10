@@ -1,11 +1,12 @@
 
 require('dotenv').config()
 //adding my config files 
+var _ = require('lodash');
 
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-// const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 // var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
@@ -15,6 +16,8 @@ var logger = require('morgan');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const authRouter = require('./routes/auth_router');
+const usersRouter = require('./routes/usersRouter');
+
 
 var cors = require('cors')
 
@@ -33,8 +36,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cors()) // use this before route handlers
 
+console.log(process.env.MONGODB_URI)
 // connect to mongodb
-mongoose.connect("mongodb://localhost:27017/MyDb", () => { console.log('connected to mongodb'); });
+mongoose.connect(process.env.MONGODB_URI, () => { console.log('connected to mongodb'); });
 
 // cookieSession config set it to one day 
 app.use(cookieSession({
@@ -57,31 +61,13 @@ function isUserAuthenticated(req, res, next) {
 }
 
 
-function print_user(req, res, next) {
-  console.log(req.body);
-  const { OAuth2Client } = require('google-auth-library');
-  const client = new OAuth2Client("1050309843237-hjb6hmp0ku18p9oblkk5fshpvp7g0v87.apps.googleusercontent.com");
-  async function verify() {
-    const ticket = await client.verifyIdToken({
-      idToken: req.body.idtoken,
-      audience: "1050309843237-hjb6hmp0ku18p9oblkk5fshpvp7g0v87.apps.googleusercontent.com",  // Specify the CLIENT_ID of the app that accesses the backend
-      // Or, if multiple clients access the backend:
-      //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
-    });
-    const payload = ticket.getPayload();
-    const userid = payload['sub'];
-    console.log(payload)
-    // If request specified a G Suite domain:
-    // const domain = payload['hd'];
-  }
-  verify().catch(console.error);
-  next();
-}
 
-app.use(print_user)
 
-// set up the auth router
-app.use('/auth', authRouter);
+
+
+// app.use('/auth', authRouter);
+app.use('/auth', usersRouter);
+
 
 
 

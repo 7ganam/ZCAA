@@ -9,6 +9,8 @@ import { Container, Col, Form, Row, FormGroup, Label, Input, Button } from 'reac
 import Network_diagramComponent from "./Network_diagramComponent/Network_diagramComponent"
 import zewail_image from './assets/zewail_image.jpg'
 import helmy_image from './assets/helmy_image1.jpg'
+import grads from './assets/grads2.jpg'
+
 import logo from './assets/logo.png'
 
 import welcome_illustration from './assets/welcome_illustration.png'
@@ -20,7 +22,7 @@ import { Card, CardHeader, CardFooter, CardBody, CardTitle, CardText } from 'rea
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons'
-
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 export default function HomeComponent() {
 
 
@@ -28,35 +30,40 @@ export default function HomeComponent() {
         <React.Fragment className='p-0'>
             <Network_diagramComponent logo_img={logo} />
             <Container id="aboutus_container" style={{ marginTop: "100px" }}>
-                <Row className="m-t-5 justify-content-center" style={{ marginTop: "30px" }}>
-                    <Col xs="8" md="6" className="" style={{ display: "flex", textAlign: "left", justifyContent: "center", flexDirection: "column" }}>
+
+                <Row id="mission_row" className="m-t-5 justify-content-center" style={{ marginTop: "30px" }}>
+                    <Col xs={{ size: 10, order: 2 }} md={{ size: 6, order: 0 }} className="" style={{ display: "flex", textAlign: "left", justifyContent: "center", flexDirection: "column" }}>
                         <span className="section_title" style={{ marginTop: "-30px", marginBottom: "10px" }}>The association vision</span>
-                        <div id="mission_text">This vision aims to utilize the energy and spirit dr Ahmed Zewail inspired to us and ensure a well-
-connected powerful ZC community.</div>
-                        <a className="zcaa_link" style={{ marginLeft: "auto", marginTop: "10px" }}>
+                        <div id="mission_text">
+                            This vision aims to utilize the energy and spirit dr Ahmed Zewail inspired to us and ensure a well-
+                            connected powerful ZC community.
+                        </div>
+                        <a className="zcaa_link mt-lg-3" style={{ marginTop: "10px" }}>
                             read our full vision
                             <FontAwesomeIcon icon={faLongArrowAltRight} className="ml-1 pt-1" />
                         </a>
                     </Col>
 
-                    <Col xs="8" md="6" className="">
-                        <img style={{ width: "100%", height: "auto" }} src={zewail_image} id="c" alt="oval" />
+                    <Col xs={{ size: 11, order: 0 }} md={{ size: 6, order: 2 }} className="">
+                        <img className="mb-5" style={{ width: "100%", height: "auto" }} src={zewail_image} id="c" alt="oval" />
                     </Col>
 
 
                 </Row>
 
-                <Row className="m-t-5 justify-content-center" style={{ marginTop: "60px" }}>
+                <Row id="vision_row" className="m-t-5 justify-content-center" style={{ marginTop: "100px" }}>
 
-                    <Col xs="8" md="6" className="">
-                        <img style={{ width: "100%", height: "auto" }} src={helmy_image} id="c" alt="oval" />
+                    <Col xs="11" md="6" className="">
+                        <img className="mb-5" style={{ width: "100%", height: "auto" }} src={grads} id="c" alt="oval" />
                     </Col>
-                    <Col xs="8" md="6" className="" style={{ display: "flex", textAlign: "left", justifyContent: "center", flexDirection: "column" }}>
+                    <Col xs="10" md="6" className="" style={{ display: "flex", textAlign: "left", justifyContent: "center", flexDirection: "column" }}>
                         <span className="section_title" style={{ marginTop: "-30px", marginBottom: "10px" }}>The association Mission</span>
-                        <div id="mission_text">Our mission is supporting Zewail City in its pursuit of excellence and building a place for
-                        the Alumni to keep ties with their alma mater by supporting their needs, elevating their
-connections, and assisting their career’s development.</div>
-                        <a className="zcaa_link" style={{ marginLeft: "auto", marginTop: "10px" }}>
+                        <div id="mission_text">
+                            Our mission is supporting Zewail City in its pursuit of excellence and building a place for
+                            the Alumni to keep ties with their alma mater by supporting their needs, elevating their
+                            connections, and assisting their career’s development.
+                        </div>
+                        <a className="zcaa_link mt-lg-3" style={{ marginTop: "10px" }}>
                             read our full mission
                             <FontAwesomeIcon icon={faLongArrowAltRight} className="ml-1 pt-1" />
                         </a>
@@ -65,8 +72,9 @@ connections, and assisting their career’s development.</div>
 
 
                 </Row>
+
             </Container>
-            <Container id="featured_news_container" className="">
+            <Container id="featured_news_container" className="" style={{ marginTop: "100px" }}>
                 <Row>
                     <Col xs="12" className="" >
                         <div
@@ -105,7 +113,7 @@ connections, and assisting their career’s development.</div>
 
                 </Row>
             </Container>
-            <Container id="shadow_container_1" fluid >
+            <Container id="shadow_container_1" fluid style={{ marginTop: "100px" }}>
 
             </Container>
             <Container id="welcome_container" fluid className="mx-0" >
@@ -124,7 +132,10 @@ connections, and assisting their career’s development.</div>
                                 <CardBody>
                                     <CardTitle id="welcome_card_body" tag="h5">apply for your membership in the associasion</CardTitle>
                                     {/* <CardText>With supporting text below as a natural lead-in to additional content.</CardText> */}
-                                    <button className="welcome_btn welcome_btn2" style={{ width: "100%", height: "55px" }}>APPLY</button>
+                                    <Link to="/LOGIN" style={{ textDecoration: 'none' }}>
+                                        <button className="welcome_btn welcome_btn2" style={{ width: "100%", height: "55px" }}>APPLY</button>
+                                    </Link>
+
                                 </CardBody>
                             </Card>
                         </Col>
@@ -134,13 +145,9 @@ connections, and assisting their career’s development.</div>
 
                 </Container>
             </Container>
-            <Container id="map_container" fluid className="my-5" >
-
+            <Container id="map_container" fluid className="">
                 <div id="map_wrapper">
                     <MapComponent />
-                </div>
-                <div>
-
                 </div>
             </Container>
         </React.Fragment>
