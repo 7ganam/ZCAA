@@ -7,11 +7,15 @@ import news_image_3 from "./assets/unnamed.jpg"
 import React from 'react'
 import { Container, Col, Form, Row, FormGroup, Label, Input, Button } from 'reactstrap';
 import Network_diagramComponent from "./Network_diagramComponent/Network_diagramComponent"
-import zewail_image from './assets/zewail_image.jpg'
+import zewail_image from './assets/zewail_image3.png'
 import helmy_image from './assets/helmy_image1.jpg'
-import grads from './assets/grads2.jpg'
+import grads from './assets/grads3.png'
 
 import logo from './assets/logo.png'
+import logo2 from './assets/logo2.png'
+import background_wave from './assets/hero4.png'
+
+
 
 import welcome_illustration from './assets/welcome_illustration.png'
 import { VectorMap } from "react-jvectormap"
@@ -29,6 +33,9 @@ export default function HomeComponent() {
     return (
         <React.Fragment className='p-0'>
             <Network_diagramComponent logo_img={logo} />
+            <div style={{ width: "100vw", overflow: "hidden" }} >
+                <img className="mb-5" style={{ width: "100%", overflow: "hidden", height: "auto", position: "absolute", transform: ' scale(1)' }} src={background_wave} id="c" alt="oval" />
+            </div>
             <Container id="aboutus_container" style={{ marginTop: "100px" }}>
 
                 <Row id="mission_row" className="m-t-5 justify-content-center" style={{ marginTop: "30px" }}>
@@ -44,14 +51,14 @@ export default function HomeComponent() {
                         </a>
                     </Col>
 
-                    <Col xs={{ size: 11, order: 0 }} md={{ size: 6, order: 2 }} className="">
-                        <img className="mb-5" style={{ width: "100%", height: "auto" }} src={zewail_image} id="c" alt="oval" />
+                    <Col xs={{ size: 11, order: 0 }} md={{ size: 6, order: 2 }} className="d-flex justify-content-center">
+                        <img className="mb-5" style={{ width: "70%", height: "auto" }} src={zewail_image} id="c" alt="oval" />
                     </Col>
 
 
                 </Row>
 
-                <Row id="vision_row" className="m-t-5 justify-content-center" style={{ marginTop: "100px" }}>
+                <Row id="vision_row" className="m-t-5 justify-content-center" style={{ marginTop: "30px" }}>
 
                     <Col xs="11" md="6" className="">
                         <img className="mb-5" style={{ width: "100%", height: "auto" }} src={grads} id="c" alt="oval" />
@@ -74,7 +81,7 @@ export default function HomeComponent() {
                 </Row>
 
             </Container>
-            <Container id="featured_news_container" className="" style={{ marginTop: "100px" }}>
+            <Container id="featured_news_container" className="" style={{ marginTop: "70px" }}>
                 <Row>
                     <Col xs="12" className="" >
                         <div
@@ -117,7 +124,7 @@ export default function HomeComponent() {
 
             </Container>
             <Container id="welcome_container" fluid className="mx-0" >
-                <img id="welcome_illustration" src={welcome_illustration} alt="oval" />
+                {/* <img id="welcome_illustration" src={welcome_illustration} alt="oval" /> */}
                 <Container>
                     <Row>
                         <div id="welcome_title" >
