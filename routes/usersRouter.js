@@ -88,8 +88,6 @@ const verify_google_email = (req, res, next) => { // verifies the email used to 
       universities: _.without(req.body.form_state.universities, undefined, null, ""),
       entities: _.without(req.body.form_state.entities, undefined, null, ""),
     }
-    // console.log("user", req.user)
-    // console.log(payload)    // If request specified a G Suite domain:    // const domain = payload['hd'];
     next();
   }
   verify().catch(console.error);
@@ -109,7 +107,7 @@ userRouter.route('/signup')
       console.log(2)
 
 
-      // -------------------- LOOK DATABASE FOR THE USER -------------------------------
+      // -------------------- LOOK DATABASE FOR THE USER ------------------------
       try {
         user_search_result = await Users.find({ zc_email: req.user.zc_email })
 

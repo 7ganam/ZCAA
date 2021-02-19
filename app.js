@@ -1,19 +1,16 @@
 
 require('dotenv').config()
-//adding my config files 
 var _ = require('lodash');
 
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 const bodyParser = require('body-parser');
-// var cookieParser = require('cookie-parser');
-var logger = require('morgan');
 
 // var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
 
-const passport = require('passport');
+
 const mongoose = require('mongoose');
 const authRouter = require('./routes/auth_router');
 const usersRouter = require('./routes/usersRouter');
@@ -21,11 +18,13 @@ const usersRouter = require('./routes/usersRouter');
 
 var cors = require('cors')
 
+
 const passportSetup = require('./passport-setup'); // import and run my passport setup 
 const cookieSession = require('cookie-session'); // don't know how does this one works .. but is used with the password lib
 
 
 var app = express();
+// app.use(cookieParser());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -36,15 +35,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cors()) // use this before route handlers
 
+
+// connect to mongodb--------------------------------------------------------
 console.log(process.env.MONGODB_URI)
-// connect to mongodb
-mongoose.connect(process.env.MONGODB_URI, () => { console.log('connected to mongodb'); });
+mongoose.connect(process.env.MONGODB_URI2, () => { console.log('connected to mongodb'); });
+
 
 // cookieSession config set it to one day 
 app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000, // One day in milliseconds
   keys: ['randomstringhere']
 }));
+
 
 // initialize passport
 app.use(passport.initialize());
