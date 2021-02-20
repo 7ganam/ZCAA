@@ -4,16 +4,16 @@
 // login in component sends the data to the back end and shows loading component untill the process finishs
 
 
-import React, { useState, useCallback, useEffect } from 'react'
+import React from 'react'
 import { Container } from 'reactstrap'
-import GooglebtnComponent from './GooglebtnComponent/GooglebtnComponent'
+
 import "./LoginComponent.css"
-import zc_logo from './zc_logo.png'
+
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import FormComponent from './FormComponent/FormComponent'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+
 
 export default function LoginComponent() {
 

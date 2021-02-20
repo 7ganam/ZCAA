@@ -1,20 +1,26 @@
 
-import React, { useState, useCallback, useEffect } from 'react'
+import { LoginContextProvider, LoginContext } from "./contexts/loginContext"
+import { useContext } from "react";
+
+
+import React, { useState, useEffect } from 'react'
 import HomeComponent from './components/pages/homeComponent/homeComponent'
 import AboutComponent from './components/pages/AboutComponent/AboutComponent'
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import NavbarComponent from './components/shared/NavbarComponent/NavbarComponent'
 import FooterComponent from './components/shared/FooterComponent/FooterComponent'
 import LoginComponent from './components/pages/LoginComponent/LoginComponent'
 import NewsComponent from './components/pages/NewsComponent/NewsComponent'
 import ScrollToTopComponent from "./ScrollToTopComponent"
 import AdminComponent from "./components/pages/AdminComponent/AdminComponent"
-import ReactLoading from 'react-loading';
 import NewsPostViewComponent from "./components/pages/NewsComponent/NewsPostViewComponent/NewsPostViewComponent"
-export default function MainComponent() {
+import LoginModalComponenet from "./components/shared/LoginModalComponenet/LoginModalComponenet"
 
-    const [LoggedIn, setLoggedIn] = useState(false);
+export default function MainComponent() {
+    const { login, logout } = useContext(LoginContext);
+
+
     // const [IsFetchingNews, setIsFetchingNews] = useState(true) // causes error ...states get set in different times ...better to depend on the fact that the data exists to show loading component than using this variable
     const [NewsFetchedSuccessfully, setNewsFetchedSuccessfullys] = useState(false)
     const [FetchingNewsError, setFetchingNewsError] = useState(null)
@@ -22,11 +28,7 @@ export default function MainComponent() {
 
 
 
-    const loggedin_context = React.createContext({ loggedIn: false, login_function: () => { } });
 
-    const login_function = () => {
-        setLoggedIn(true)
-    }
 
     const fetchCourses = () => {
         console.log(process.env.REACT_APP_BACKEND_URL)
@@ -50,10 +52,18 @@ export default function MainComponent() {
             });
     }
 
+    const check_if_logged_in = () => {
+        const storedData = JSON.parse(localStorage.getItem('userData'));
+        if (storedData && storedData.token) {
+            console.log(storedData.token)
+            login(storedData.token, storedData.user, storedData.expirateion_date_string, false);
+        }
+    }
 
 
     useEffect(() => {
         fetchCourses()
+        check_if_logged_in()
     }, []);
 
 
@@ -83,41 +93,42 @@ export default function MainComponent() {
     return (
         <div id="main_component">
             <div id="content_wrap">
-                <loggedin_context.Provider value={LoggedIn} >
-                    <Router >
-                        <ScrollToTopComponent />
-                        <NavbarComponent />
-                        {/* the navbar has to be inside the router since it uses LINK component which runs only inside router component */}
+                <LoginModalComponenet />
 
-                        <Route exact path="/">
-                            <HomeComponent />
-                        </Route>
-                        <Route exact path="/ABOUTUS">
-                            <AboutComponent />
-                        </Route>
-                        <Route exact path="/LOGIN">
-                            <LoginComponent />
-                        </Route>
-                        <Route exact path="/NEWS">
-                            <NewsComponent
-                                news_state={{ NewsFetchedSuccessfully, FetchingNewsError, News }}
-                            />
-                        </Route>
-                        <Route path="/NEWS/:post_id"
-                            component={(props) => <News_post_with_id
-                                {...props} // you have to re pass the router props before passing your own
-                                news_state={{ NewsFetchedSuccessfully, FetchingNewsError, News }}
-                            />}
+                <Router >
+                    <ScrollToTopComponent />
+                    <NavbarComponent />
+                    {/* the navbar has to be inside the router since it uses LINK component which runs only inside router component */}
+
+                    <Route exact path="/">
+                        <HomeComponent />
+                    </Route>
+                    <Route exact path="/ABOUTUS">
+                        <AboutComponent />
+                    </Route>
+                    <Route exact path="/LOGIN">
+                        <LoginComponent />
+                    </Route>
+                    <Route exact path="/NEWS">
+                        <NewsComponent
+                            news_state={{ NewsFetchedSuccessfully, FetchingNewsError, News }}
                         />
+                    </Route>
+                    <Route path="/NEWS/:post_id"
+                        component={(props) => <News_post_with_id
+                            {...props} // you have to re pass the router props before passing your own
+                            news_state={{ NewsFetchedSuccessfully, FetchingNewsError, News }}
+                        />}
+                    />
+
+                    <Route exact path="/ADMIN">
+                        <AdminComponent />
+                    </Route>
+
+                </Router>
 
 
 
-                        <Route exact path="/ADMIN">
-                            <AdminComponent />
-                        </Route>
-
-                    </Router>
-                </loggedin_context.Provider>
             </div>
             <FooterComponent />
 

@@ -1,6 +1,8 @@
 // components/contactus-form.component.js
+import { useContext } from "react";
+import { LoginContext } from "../../../../contexts/loginContext"
 
-import React, { useState, useCallback, useEffect, useRef } from 'react'
+import React, { useState, useCallback, useRef } from 'react'
 import { Formik, Field, Form, FieldArray, ErrorMessage } from 'formik';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'reactstrap'
@@ -11,13 +13,12 @@ import CollapsingEntityCardComponent from './CollapsingEntityCardComponent/Colla
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
+import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import * as Yup from 'yup';
 import TextError from "./TextError"
 import zc_logo from '../zc_logo.png'
-import logo from '../logo.png'
 import logo_shadowed from '../logo_shadowed.png'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Modal, ModalBody } from 'reactstrap';
 import GooglebtnComponent from './GooglebtnComponent/GooglebtnComponent'
 import ReactLoading from 'react-loading';
 
@@ -59,6 +60,8 @@ const SignupSchema = Yup.object().shape({
 
 const FormComponent = (props) => {
 
+    const { login, IsLoggedIn, Token } = useContext(LoginContext);
+
     // http states
     const [Response_json_content, setResponse_json_content] = useState({});
     const [Fetch_success, setFetch_success] = useState(false);
@@ -73,9 +76,6 @@ const FormComponent = (props) => {
     let [gdata, set_gdata] = useState(null)
 
 
-    const handle_click = useCallback((request_object) => {
-        set_gdata(request_object);
-    }, []);
 
 
     const submit_applicant = async (google_data) => {
@@ -101,9 +101,10 @@ const FormComponent = (props) => {
             setSending_data(false)
             setResponse_json_content(response_json_content)
 
-            if (response_json_content.message == "success" || response_json_content.message == "already_applied_before") {
+            if (response_json_content.message === "success" || response_json_content.message === "already_applied_before") {
                 setFetch_success(true)
-                // this.login(response_json_content.user, response_json_content.token, response_json_content.expirateion_date_string)
+                console.log(response_json_content)
+                login(response_json_content.user, response_json_content.token, response_json_content.expirateion_date_string, true)
             }
 
         } catch (err) {
@@ -135,7 +136,7 @@ const FormComponent = (props) => {
                 return (
                     <Container>
                         {
-                            Fetch_success ?
+                            IsLoggedIn ?
                                 <div id="application_sucess">
                                     <div style={{ marginBottom: "30px" }}>
                                         {
@@ -146,7 +147,7 @@ const FormComponent = (props) => {
                                                         <img style={{
                                                             width: "100%", minWidth: "155px", height: "auto", marginTop: "20px", borderRadius: "50%", border: '11px solid #ADE3ED'
 
-                                                        }} src={Response_json_content.user.g_picture} alt="logo" />
+                                                        }} src={Fetch_success ? Response_json_content.user.g_picture : Token.g_picture} alt="logo" />
 
                                                         <img style={{
                                                             width: "30%", minWidth: "70px", height: "auto", position: "absolute", bottom: "-20px", right: "0px"
@@ -205,9 +206,9 @@ const FormComponent = (props) => {
                                                     </div>
                                                 </ModalBody>
                                                 {/* <ModalFooter>
-                        <Button color="primary" onClick={toggle}>Do Something</Button>{' '}
-                        <Button color="secondary" onClick={toggle}>Cancel</Button>
-                    </ModalFooter> */}
+                                                    <Button color="primary" onClick={toggle}>Do Something</Button>{' '}
+                                                    <Button color="secondary" onClick={toggle}>Cancel</Button>
+                                                </ModalFooter> */}
                                             </Modal>
                                         </div>
 
@@ -490,7 +491,7 @@ const FormComponent = (props) => {
                                                         </div>
                                                     </Col>
                                                 </Row>
-                                                {formik_object.values.exp_field == "other" &&
+                                                {formik_object.values.exp_field === "other" &&
                                                     <Row className="justify-content-end ">
                                                         <Col lg="8">
                                                             <div className="form-group" style={{ width: "100%" }}>

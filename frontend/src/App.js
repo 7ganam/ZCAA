@@ -1,10 +1,14 @@
-import logo from './logo.svg';
+import { LoginContextProvider, LoginContext } from "./contexts/loginContext"
+import { useContext } from "react";
 import './App.css';
 import MainComponent from "./mainComponent"
 function App() {
   return (
     <div className="App">
-      <MainComponent />
+      <LoginContextProvider>
+        <MainComponent />
+      </LoginContextProvider>
+
     </div>
   );
 }

@@ -22,7 +22,7 @@ const verify_google_email = (req, res, next) => { // verifies the email used to 
   const { OAuth2Client } = require('google-auth-library');
   const client = new OAuth2Client(process.env.OAUTH2ClIENT);
   async function verify() {
-    const use_google_oauth = true // google cloud verification takes a long time suddenly .. they might have a problem on their servers .. disaple it for development and rely on client side verification.
+    const use_google_oauth = false // google cloud verification takes a long time suddenly .. they might have a problem on their servers .. disaple it for development and rely on client side verification.
 
     let payload = {}
     let userid = ""
@@ -96,6 +96,69 @@ const verify_google_email = (req, res, next) => { // verifies the email used to 
 
 }
 
+
+
+
+const attach_login_user = (req, res, next) => { // verifies the email used to sign in is a zc email and adds the user object to req
+  console.log(1)
+  // console.log(req.body)
+  const { OAuth2Client } = require('google-auth-library');
+  const client = new OAuth2Client(process.env.OAUTH2ClIENT);
+  async function verify() {
+    const use_google_oauth = false // google cloud verification takes a long time suddenly .. they might have a problem on their servers .. disaple it for development and rely on client side verification.
+
+    let payload = {}
+    let userid = ""
+    let g_picture = ""
+    let zc_email = ""
+
+    if (use_google_oauth) {
+      const ticket = await client.verifyIdToken({
+        idToken: req.body.google_data.tokenObj.id_token,
+        audience: process.env.OAUTH2ClIENTAUDIENCE,  // Specify the CLIENT_ID of the app that accesses the backend
+        // Or, if multiple clients access the backend:
+        //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
+      });
+      payload = ticket.getPayload();
+      userid = payload['sub'];
+      g_picture = payload.picture;
+      zc_email = payload.email;
+      if (!_.has(payload, 'hd')) {
+        const prod_error = new Error('google says this email isnt a zewail city email.');
+        prod_error.status = "500"
+        return next(prod_error)
+      }
+      else if (_.has(payload, 'hd') && payload.hd != 'zewailcity.edu.eg') {
+        const prod_error = new Error('google says this email isnt a zewail city email 2.');
+        prod_error.status = "500"
+        return next(prod_error)
+      }
+      else if (!payload.email_verified) {
+        const prod_error = new Error('google says this email isnt verified.');
+        prod_error.status = "500"
+        return next(prod_error)
+      }
+    }
+    else {
+      payload = req.body.google_data;
+      userid = payload.profileObj.googleId;
+      g_picture = payload.profileObj.imageUrl;
+      zc_email = payload.profileObj.email;
+
+    }
+    console.log(1.1)
+    req.user = {
+      g_userid: userid,
+      g_picture: g_picture,
+      zc_email: zc_email,
+      g_name: payload.name,
+
+    }
+    next();
+  }
+  verify().catch(console.error);
+
+}
 
 
 
@@ -208,16 +271,19 @@ userRouter.route('/signup')
     });
 
 
+
+
 userRouter.route('/login') //TODO:  add false log in 
   .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
-  .post(cors.corsWithOptions,
+  .post(cors.corsWithOptions, attach_login_user,
     async (req, res, next) => {
       const { email, password } = req.body;
 
       // seach database for the same email
       let existingUser;
       try {
-        existingUser = await Users.findOne({ email: email });
+        existingUser = await Users.findOne({ zc_email: req.user.zc_email });
+        console.log({ existingUser })
       } catch (dev_err) {
         const prod_error = new Error('Loggin in failed, please try again later.')
         prod_error.status = "500"
@@ -225,63 +291,46 @@ userRouter.route('/login') //TODO:  add false log in
       }
 
 
-      //check if the password could be used to generate the same hashed password in the database
-      let isValidPassword = false;
-      try {
-        isValidPassword = await bcrypt.compare(password, existingUser.password);
-      } catch (dev_err) {
-        const prod_error = new Error('Could not log you in, please check your credentials and try again.')
-        prod_error.status = "500"
-        return next(prod_error);
+      if (!existingUser) {
+        return res
+          .status(442)
+          .json({
+            message: 'Failed to login, you are not a member.',
+          });
       }
-      if (!isValidPassword) {
-        const prod_error = new Error('Invalid credentials, could not log you in.')
-        prod_error.status = "403"
-        return next(prod_error);
-      }
-      ////t in case of not using hashes
-      //      // if (!existingUser || existingUser.password !== password) {
-      //      //   const prod_error = new Error('Invalid credentials, could not log you in.');
-      //      //   prod_error.status = "403"
-      //      //   return next(prod_error);
-      //      // }
+      else {
+        // GENERATE TOKEN----------------------
+        let token;
+        let expiration_time_in_hours = 10000;//TODO: make the token expiration in the front end  ... i will leave this huge number as is now
+        let expiration_date = new Date(new Date().getTime() + expiration_time_in_hours * 60 * 60 * 1000);
+        let expirateion_date_string = expiration_date.toISOString();
+        try {
+          token = jwt.sign(
+            { user: existingUser },
+            TOKEN_SECRET_KEY,
+            { expiresIn: expiration_time_in_hours + 'h' }
+          );
+        } catch (dev_err) {
+          const prod_error = new Error('logging in failed, please try later.');
+          prod_error.status = "500"
+          return next(dev_err)
+          // return next(prod_error)
+        }
 
+        // SEND TOKEN AND USER RESPONSE----------------------
+        console.log(5)
 
-      //generating tokens
-
-      let token;
-      let expiration_time_in_hours = 10000;//TODO: make the token expiration in the front end  ... i will leave this huge number as is now
-      let expiration_date = new Date(new Date().getTime() + expiration_time_in_hours * 60 * 60 * 1000);
-      let expirateion_date_string = expiration_date.toISOString();
-      try {
-        token = jwt.sign(
-          { user: existingUser, userId: existingUser.id, email: existingUser.email, image: existingUser.image },
-
-          TOKEN_SECRET_KEY,
-          { expiresIn: expiration_time_in_hours + 'h' }
-        );
-      } catch (dev_err) {
-        const prod_error = new Error('signing up failed, please try later.');
-        prod_error.status = "500"
-        return next(dev_err)
-        // return next(prod_error)
+        res
+          .status(201)
+          .json({
+            message: 'success',
+            expirateion_date_string: expirateion_date_string,
+            user: existingUser,
+            token: token
+          });
       }
 
 
-      //sending the response back
-      res
-        .status(201)
-        .json({
-          message: 'Logged in!',
-          expirateion_date_string: expirateion_date_string,
-          user:
-          {
-            email: existingUser.email,
-            id: existingUser.id,
-            image: existingUser.image
-          },
-          token: token
-        });
 
 
 
