@@ -10,6 +10,7 @@
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.6.0",
     "bootstrap": "^4.5.3",
+    "editorjs-paragraph-with-alignment": "^2.0.0",
     "formik": "^2.2.6",
     "googleapis": "^66.0.0",
     "http-proxy-middleware": "^1.0.6",

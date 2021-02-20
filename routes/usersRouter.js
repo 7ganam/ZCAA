@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -9,7 +11,7 @@ var _ = require('lodash');
 
 
 userRouter.use(bodyParser.json());
-const TOKEN_SECRET_KEY = "this_should_be_imported_from_env_variable" //TODO:
+const TOKEN_SECRET_KEY = process.env.TOKEN_SECRET_KEY;
 const jwt = require('jsonwebtoken');
 
 
@@ -18,9 +20,9 @@ const verify_google_email = (req, res, next) => { // verifies the email used to 
   console.log(1)
   // console.log(req.body)
   const { OAuth2Client } = require('google-auth-library');
-  const client = new OAuth2Client("1050309843237-hjb6hmp0ku18p9oblkk5fshpvp7g0v87.apps.googleusercontent.com");
+  const client = new OAuth2Client(process.env.OAUTH2ClIENT);
   async function verify() {
-    const use_google_oauth = false // google cloud verification takes a long time suddenly .. they might have a problem on their servers .. disaple it for development and rely on client side verification.
+    const use_google_oauth = true // google cloud verification takes a long time suddenly .. they might have a problem on their servers .. disaple it for development and rely on client side verification.
 
     let payload = {}
     let userid = ""
@@ -30,7 +32,7 @@ const verify_google_email = (req, res, next) => { // verifies the email used to 
     if (use_google_oauth) {
       const ticket = await client.verifyIdToken({
         idToken: req.body.google_data.tokenObj.id_token,
-        audience: "1050309843237-hjb6hmp0ku18p9oblkk5fshpvp7g0v87.apps.googleusercontent.com",  // Specify the CLIENT_ID of the app that accesses the backend
+        audience: process.env.OAUTH2ClIENTAUDIENCE,  // Specify the CLIENT_ID of the app that accesses the backend
         // Or, if multiple clients access the backend:
         //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
       });

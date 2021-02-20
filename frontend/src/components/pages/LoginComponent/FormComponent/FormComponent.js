@@ -86,7 +86,6 @@ const FormComponent = (props) => {
             let form_state = formRef.current.values;
             let id_token = google_data.tokenObj.id_token
             const body_data = { form_state, google_data }
-            console.log({ body_data })
             const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/auth/signup`, {
                 method: 'POST',
                 headers: {
@@ -100,11 +99,9 @@ const FormComponent = (props) => {
                 throw new Error(response_json_content.message || "can't fetch data ... could be a connection error or unhandled backend error");
             }
             setSending_data(false)
-            console.log({ response_json_content })
             setResponse_json_content(response_json_content)
 
             if (response_json_content.message == "success" || response_json_content.message == "already_applied_before") {
-                console.log("expiration from login", response_json_content.expirateion_date_string)
                 setFetch_success(true)
                 // this.login(response_json_content.user, response_json_content.token, response_json_content.expirateion_date_string)
             }
@@ -229,8 +226,8 @@ const FormComponent = (props) => {
                                                                 borderBottomColor: " #C5BCBC"
                                                             }} className="form_section_title"
                                                         >
-                                                            featured news
-                                    </div>
+                                                            Personal info
+                                                         </div>
                                                     </Col>
                                                 </Row>
                                                 <Row className="justify-content-end">

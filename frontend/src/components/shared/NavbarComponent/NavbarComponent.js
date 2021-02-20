@@ -53,7 +53,7 @@ const NavbarComponent = (props) => {
                                         </Link>
                                     </NavItem>
                                     <NavItem>
-                                        <Link to="/">
+                                        <Link to="/NEWS">
                                             <NavLink >news</NavLink>
                                         </Link>
                                     </NavItem>
@@ -66,8 +66,11 @@ const NavbarComponent = (props) => {
                                             <NavLink >apply for mempership</NavLink>
                                         </Link>
                                     </NavItem>
-
-
+                                    <NavItem>
+                                        <Link to="/ADMIN">
+                                            <NavLink >ADMIN</NavLink>
+                                        </Link>
+                                    </NavItem>
                                 </Nav>
                                 {/* <NavbarText>Simple Text</NavbarText> */}
                             </Collapse>

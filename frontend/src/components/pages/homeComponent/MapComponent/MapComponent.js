@@ -20,7 +20,6 @@ const markers2 = [
 ]
 
 const handleClick = (e, countryCode) => {
-    console.log(countryCode);
     // console.log(data.ref_country_codes)
 };
 

@@ -10,7 +10,7 @@ const NewsCardComponent = (props) => {
     return (
         <div >
 
-            <Card style={{ width: "100%" }} style={{ alignItems: "center", minHeight: "460px", filter: 'drop-shadow(-1px 1px 8px rgba(173, 227, 237, 0.3))' }}   >
+            <Card style={{ width: "100%" }} style={{ alignItems: "center", minHeight: "460px", filter: 'drop-shadow(-1px 1px 8px rgba(173, 227, 237, 0.6))' }}   >
                 <CardImg top style={{ objectFit: "cover", height: "200px", width: "95%", marginTop: "7px", borderRadius: "12px" }} src={props.img} alt="Card image cap" />
                 <CardBody style={{ width: "100%" }}>
                     <CardTitle tag="h5" style={{ fontSize: "18px" }}>{props.title}</CardTitle>

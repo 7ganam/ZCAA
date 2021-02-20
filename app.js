@@ -7,31 +7,19 @@ var express = require('express');
 var path = require('path');
 const bodyParser = require('body-parser');
 
-// var indexRouter = require('./routes/index');
-// var usersRouter = require('./routes/users');
 
 
 const mongoose = require('mongoose');
-const authRouter = require('./routes/auth_router');
 const usersRouter = require('./routes/usersRouter');
+const newsRouter = require('./routes/news_router');
 
 
 var cors = require('cors')
 
-
-const passportSetup = require('./passport-setup'); // import and run my passport setup 
-const cookieSession = require('cookie-session'); // don't know how does this one works .. but is used with the password lib
-
-
 var app = express();
-// app.use(cookieParser());
-app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-// app.use('/', indexRouter);
-// app.use('/users', usersRouter);
 
 app.use(cors()) // use this before route handlers
 
@@ -41,16 +29,6 @@ console.log(process.env.MONGODB_URI)
 mongoose.connect(process.env.MONGODB_URI2, () => { console.log('connected to mongodb'); });
 
 
-// cookieSession config set it to one day 
-app.use(cookieSession({
-  maxAge: 24 * 60 * 60 * 1000, // One day in milliseconds
-  keys: ['randomstringhere']
-}));
-
-
-// initialize passport
-app.use(passport.initialize());
-app.use(passport.session());
 
 
 // Middleware to check if the user is authenticated
@@ -69,6 +47,7 @@ function isUserAuthenticated(req, res, next) {
 
 // app.use('/auth', authRouter);
 app.use('/auth', usersRouter);
+app.use('/api/news', newsRouter);
 
 
 
