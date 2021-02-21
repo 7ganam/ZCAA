@@ -2,7 +2,7 @@
   "name": "zcaa",
   "version": "10.19.0",
   "engines": {
-    "node": ">=10.19 <=11.10"
+    "node": ">=10.18 <=10.19"
   },
   "private": true,
   "scripts": {
