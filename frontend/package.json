@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@editorjs/embed": "^2.4.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fortawesome/react-fontawesome": "^0.1.14",
@@ -10,6 +11,7 @@
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.6.0",
     "bootstrap": "^4.5.3",
+    "editorjs-inline-font-size-tool": "^1.0.1",
     "editorjs-paragraph-with-alignment": "^2.0.0",
     "formik": "^2.2.6",
     "googleapis": "^66.0.0",
@@ -19,6 +21,7 @@
     "react-country-region-selector": "^3.0.1",
     "react-datepicker": "^3.3.0",
     "react-dom": "^17.0.1",
+    "react-editor-js": "^1.9.0",
     "react-google-login": "^5.2.2",
     "react-jvectormap": "0.0.16",
     "react-loading": "^2.0.3",
