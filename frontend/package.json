@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@editorjs/editorjs": "^2.19.1",
     "@editorjs/embed": "^2.4.0",
     "@editorjs/paragraph": "^2.8.0",
     "@editorjs/underline": "^1.0.0",
