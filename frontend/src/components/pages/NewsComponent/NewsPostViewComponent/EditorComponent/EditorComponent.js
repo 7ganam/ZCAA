@@ -15,13 +15,11 @@ export default class EditorComponent extends Component {
         const savedData = await this.editorInstance.save();
         // this.editorInstance.readOnly.toggle();
         this.props.pass_data_up(savedData)
-        console.log(this.props.post.EditorData)
 
     }
 
     componentDidMount() {
         // this.editorInstance.readOnly.toggle();
-        console.log("ed", this.props)
     }
 
 
@@ -36,7 +34,7 @@ export default class EditorComponent extends Component {
                         autofocus={true}
                         tools={EDITOR_JS_TOOLS}
                         onChange={this.handleSave}
-                    />;
+                    />
                 </div>
 
             </Fragment>

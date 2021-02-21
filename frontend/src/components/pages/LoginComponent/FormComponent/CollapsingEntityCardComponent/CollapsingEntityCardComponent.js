@@ -22,7 +22,6 @@ function CollapsingEntityCardComponent(props) {
 
     return (
         <div>
-
             <Card className="mt-1">
                 <CardHeader className="session_card_head box_header p-0 d-flex m-0" style={
                     IsOpen ? {

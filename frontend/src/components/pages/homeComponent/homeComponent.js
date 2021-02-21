@@ -38,27 +38,27 @@ export default function HomeComponent() {
             </div>
             <Container id="aboutus_container" style={{ marginTop: "100px" }}>
 
-                <Row id="mission_row" className="m-t-5 justify-content-center" style={{ marginTop: "30px" }}>
+                <Row id="vision_row" className="m-t-5 justify-content-center" style={{ marginTop: "30px" }}>
                     <Col xs={{ size: 10, order: 2 }} md={{ size: 6, order: 0 }} className="" style={{ display: "flex", textAlign: "left", justifyContent: "center", flexDirection: "column" }}>
-                        <span className="section_title" style={{ marginTop: "-30px", marginBottom: "10px" }}>The association vision</span>
-                        <div id="mission_text">
+                        <span className="section_title " style={{ marginTop: "-30px", marginBottom: "10px" }}>The association vision</span>
+                        <div id="mission_text" className="">
                             This vision aims to utilize the energy and spirit dr Ahmed Zewail inspired to us and ensure a well-
                             connected powerful ZC community.
                         </div>
-                        <a className="zcaa_link mt-lg-3" style={{ marginTop: "10px" }}>
+                        <a className="zcaa_link mt-lg-3 mt-4" style={{ marginTop: "10px", cursor: "pointer" }}>
                             read our full vision
                             <FontAwesomeIcon icon={faLongArrowAltRight} className="ml-1 pt-1" />
                         </a>
                     </Col>
 
-                    <Col xs={{ size: 11, order: 0 }} md={{ size: 6, order: 2 }} className="d-flex justify-content-center">
-                        <img className="mb-5" style={{ width: "70%", height: "auto" }} src={zewail_image} id="c" alt="oval" />
+                    <Col xs={{ size: 11, order: 0 }} md={{ size: 6, order: 2 }} className="d-flex">
+                        <img className="mb-5 ml-md-auto ml-auto mr-auto mr-md-0" style={{ width: "70%", height: "auto" }} src={zewail_image} id="c" alt="oval" />
                     </Col>
 
 
                 </Row>
 
-                <Row id="vision_row" className="m-t-5 justify-content-center" style={{ marginTop: "30px" }}>
+                <Row id="mission_row" className=" justify-content-center" style={{}}>
 
                     <Col xs="11" md="6" className="">
                         <img className="mb-5" style={{ width: "100%", height: "auto" }} src={grads} id="c" alt="oval" />
@@ -70,7 +70,7 @@ export default function HomeComponent() {
                             the Alumni to keep ties with their alma mater by supporting their needs, elevating their
                             connections, and assisting their career’s development.
                         </div>
-                        <a className="zcaa_link mt-lg-3" style={{ marginTop: "10px" }}>
+                        <a className="zcaa_link mt-lg-3 mt-4" style={{ marginTop: "10px", cursor: "pointer" }}>
                             read our full mission
                             <FontAwesomeIcon icon={faLongArrowAltRight} className="ml-1 pt-1" />
                         </a>
@@ -81,7 +81,7 @@ export default function HomeComponent() {
                 </Row>
 
             </Container>
-            <Container id="featured_news_container" className="" style={{ marginTop: "70px" }}>
+            <Container id="featured_news_container" className="" style={{ marginTop: "10px" }}>
                 <Row>
                     <Col xs="12" className="" >
                         <div

@@ -13,13 +13,26 @@ const NavbarComponent = (props) => {
 
     return (
         <React.Fragment>
-            <Container fluid className="d-flex justify-content-left" style={{ height: "50px", backgroundColor: "#26ADCB" }}>
-                <NavItem>
-                    <Link to="/ADMIN">
-                        <NavLink >ADMIN</NavLink>
-                    </Link>
-                </NavItem>
-            </Container>
+            {
+                !!Token && Token.admin &&
+                <Container fluid className="d-flex justify-content-left" style={{ height: "50px", backgroundColor: "#26ADCB", paddingLeft: "0px" }}>
+                    <div style={{ margin: "0px 0px", color: 'white', fontWeight: "bolder", display: "flex", alignItems: "center", backgroundColor: "black", padding: "10px" }}>
+
+                        <div >ADMIN actions : </div>
+
+                    </div>
+                    <div style={{ margin: "0px 20px", color: 'white', fontWeight: "bold", display: "flex", alignItems: "center" }}>
+                        <Link to="/ADMIN/CREATEPOST">
+                            <div >CREATE NEW POST</div>
+                        </Link>
+                    </div>
+                    <div style={{ color: 'white', fontWeight: "bold", display: "flex", alignItems: "center" }}>
+                        <Link to="/NEWS">
+                            <div >DELETE POSTS</div>
+                        </Link>
+                    </div>
+                </Container>
+            }
             <Container className="d-flex justify-content-center">
                 <div id="intro_text" className="header_font">
                     ZEWAILCITY
@@ -57,7 +70,7 @@ const NavbarComponent = (props) => {
                                         <>
                                             <NavItem style={{ borderRightStyle: "solid", borderRightWidth: ".5px", borderRightColor: "grey" }}>
                                                 <Link to="/LOGIN">
-                                                    <NavLink >apply for mempership</NavLink>
+                                                    <NavLink >apply for membership</NavLink>
                                                 </Link>
                                             </NavItem>
                                             <NavItem onClick={ToggleLoginModal} style={{ cursor: 'pointer' }}>

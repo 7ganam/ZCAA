@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Container, Row, Col } from 'reactstrap'
 import "./AboutComponent.css"
 import logo from './logo.png'
+import bg from "./bg2.png"
 import MemberCardComponent from "./MemberCardComponent/MemberCardComponent"
 export default function AboutComponent() {
     const [members, setMembers] = useState([]);
@@ -38,6 +39,7 @@ export default function AboutComponent() {
     }, [])
     return (
         <React.Fragment>
+             <img style={{ width: "100%", height: "auto", position: "absolute", top: 0 ,zIndex:"-2"}} src={bg} id="c" alt="oval" />
             <Container id="mission_vision_container">
                 <Row style={{ marginTop: "60px", marginBottom: "10px" }}>
                     <Col md="9">

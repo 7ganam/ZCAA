@@ -121,7 +121,7 @@ export default function MainComponent() {
                         />}
                     />
 
-                    <Route exact path="/ADMIN">
+                    <Route exact path="/ADMIN/CREATEPOST">
                         <AdminComponent />
                     </Route>
 

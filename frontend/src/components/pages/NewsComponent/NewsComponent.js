@@ -4,8 +4,9 @@ import React, { Component, Fragment } from 'react'
 import { Container, Row, Col } from 'reactstrap';
 import ReactLoading from 'react-loading';
 import NewsCardComponenet from "./NewsCardComponenet/NewsCardComponenet"
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./NewsComponent.css"
+import bg from "./bg2.png"
+
 
 export default class NewsComponent extends Component {
     constructor(props) {
@@ -17,38 +18,36 @@ export default class NewsComponent extends Component {
 
     render_news() {
         let posts = this.props.news_state.News.map
-            ((post, index) => <Link to={`/NEWS/${post._id}`}><NewsCardComponenet post={post} /></Link>)
+            ((post, index) => <NewsCardComponenet post={post} />)
 
         return (posts)
     }
 
-
-
     render() {
         return (
             <Fragment>
+                <img style={{ width: "100%", height: "auto", position: "absolute", top: 0, zIndex: "-2" }} src={bg} id="c" alt="oval" />
                 <Container>
-                    <Row>
-                        <Col id="categories_col" md={3}>
+                    {Object.keys(this.props.news_state.News).length === 0 ?
+                        <Row style={{ height: "600px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                            <div style={{ marginTop: "px", position: "relative", top: "-10%" }}>
+                                <ReactLoading type={"spin"} color={"#00D2F9"} width={"10vw"} />
+                            </div>
+                        </Row>
+                        :
+                        <Row>
+                            <Col id="categories_col" md={3}>
 
-                        </Col>
-                        <Col id="news_cards_row" md={9}>
-                            {
-                                Object.keys(this.props.news_state.News).length == 0 ?
+                            </Col>
+                            <Col id="news_cards_row" md={9}>
+                                {
 
-                                    <div id="loading_spinner" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "400px" }} >
-                                        <div style={{ marginTop: "100px" }}>
-                                            <ReactLoading type={"spin"} color={"#00D2F9"} width={"20vw"} />
-                                        </div>
-                                    </div>
-                                    :
-                                    // <div>{JSON.stringify(this.props.news_state.News[7], null, 2)}</div>
+
                                     this.render_news()
 
-                            }
-                            {/* <NewsCardComponenet /> */}
-                        </Col>
-                    </Row>
+                                }
+                            </Col>
+                        </Row>}
                 </Container>
             </Fragment>
 

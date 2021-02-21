@@ -254,7 +254,7 @@ const FormComponent = (props) => {
                                                     <Col lg="8">
                                                         <div className="form-group" style={{ width: "100%" }}>
                                                             <label htmlFor="email" className="form_text" style={{ letterSpacing: '0.2em' }}>prefered email for communication
-                                            <span style={{ color: "#0091AC", fontWeight: "bolder", fontSize: "11" }}>{" (Optional)"}</span>
+                                                             <span style={{ color: "#0091AC", fontWeight: "bolder", fontSize: "11" }}>{" (Optional)"}</span>
                                                             </label>
                                                             <Field name="email" className="form-control in_field " type="email" />
                                                             <ErrorMessage name='email' component={TextError} />
@@ -266,7 +266,7 @@ const FormComponent = (props) => {
                                                     <Col lg="8">
                                                         <label className="form_text">
                                                             Birth date
-                                        </label>
+                                                         </label>
                                                     </Col>
 
                                                 </Row>
@@ -364,7 +364,6 @@ const FormComponent = (props) => {
                                                             <label htmlFor="address" className="form_text">address </label>
                                                             <Field name="address" className="form-control in_field" type="text" />
                                                             <ErrorMessage name='address' component={TextError} />
-
                                                         </div>
                                                     </Col>
                                                 </Row>

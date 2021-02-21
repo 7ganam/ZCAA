@@ -30,7 +30,7 @@ export default class EditorComponent extends Component {
                         autofocus={true}
                         tools={EDITOR_JS_TOOLS}
                         onChange={this.handleSave}
-                    />;
+                    />
                 </div>
 
             </Fragment>

@@ -14,3 +14,12 @@
 .form_error_text{
     color: red
 }
+.react-datepicker-popper{
+    z-index: 11111111;
+}
+
+.meta_label{
+    font-family: Cairo;
+    font-size: 20px;
+    color: #26ADCB;
+}

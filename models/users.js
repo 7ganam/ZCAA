@@ -96,10 +96,6 @@ const User = new Schema({
         type: String,
         // required: true
     },
-    first_name: {
-        type: String,
-        // required: true
-    },
     last_name: {
         type: String,
         // required: true
@@ -164,6 +160,10 @@ const User = new Schema({
         type: [entities_schema],
         // required: true
     },
+    admin: {
+        type: Boolean,
+        default: false
+    }
 
 },
     {

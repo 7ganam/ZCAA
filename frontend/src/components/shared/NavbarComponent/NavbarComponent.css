@@ -79,7 +79,12 @@
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-    
+    .nav-item{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -93,6 +98,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     .navbar-nav{
         text-align: center;
