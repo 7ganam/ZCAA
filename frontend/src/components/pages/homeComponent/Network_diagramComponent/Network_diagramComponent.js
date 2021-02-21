@@ -6,6 +6,7 @@ import "./Network_diagramComponent.css"
 
 export default function Network_diagramComponent(props) {
     initJParticle($)
+
     useEffect(() => {
 
         var w = window,
@@ -16,6 +17,7 @@ export default function Network_diagramComponent(props) {
             y = w.innerHeight || e.clientHeight || g.clientHeight;
 
         const particles_number = Math.ceil(100 / 1520 * x);
+
 
         $("#network_div").jParticle({
             particlesNumber: particles_number, background: 'CCE6EB', color: 'white', createLinkDist: 180, speed: 100

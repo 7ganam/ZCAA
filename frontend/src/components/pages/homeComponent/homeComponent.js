@@ -11,6 +11,7 @@ import zewail_image from './assets/zewail_image3.png'
 import grads from './assets/grads3.png'
 
 import logo from './assets/logo.png'
+
 import background_wave from './assets/hero4.png'
 
 
@@ -73,6 +74,7 @@ export default function HomeComponent(props) {
             </div>
             <Container id="aboutus_container">
 
+
                 <Row id="vision_row" className="m-t-5 justify-content-center" style={{ marginTop: "30px" }}>
                     <Col xs={{ size: 10, order: 2 }} md={{ size: 6, order: 0 }} className="" style={{ display: "flex", textAlign: "left", justifyContent: "center", flexDirection: "column" }}>
                         <span className="section_title " style={{ marginTop: "-30px", marginBottom: "10px" }}>The association vision</span>
@@ -88,12 +90,14 @@ export default function HomeComponent(props) {
 
                     <Col xs={{ size: 11, order: 0 }} md={{ size: 6, order: 2 }} className="d-flex">
                         <img className="mb-5 ml-md-auto ml-auto mr-auto mr-md-0" style={{ width: "70%", height: "auto" }} src={zewail_image} id="zewail_image" alt="oval" />
+
                     </Col>
 
 
                 </Row>
 
                 <Row id="mission_row" className=" justify-content-center" style={{}}>
+
 
                     <Col xs="11" md="6" className="">
                         <img className="mb-5" style={{ width: "100%", height: "auto" }} src={grads} id="c" alt="oval" />
@@ -117,6 +121,7 @@ export default function HomeComponent(props) {
 
             </Container>
             <Container id="featured_news_container" className="" style={{ marginTop: "10px" }}>
+
                 <Row>
                     <Col xs="12" className="" >
                         <div

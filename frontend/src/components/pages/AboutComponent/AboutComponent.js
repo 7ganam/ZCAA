@@ -68,7 +68,9 @@ export default function AboutComponent() {
                     </Col>
                     <Col md="9">
                         <span id='about_header' >OUR  vision:</span>
+
                         <div id="mission_text" className="mission_vison_text">               The current ZCAA vision follows Ahmed Zewail’s  eagerness to contribute to the
+
                         Egyptian community through propagation of knowledge. The motivation that Zewail
                         inspired to the growing ZC community was reflected in substantial achievements. Many
                         ZC Alumni joined reputable institutions all over the world where their knowledge
