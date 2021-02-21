@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
-import { VectorMap } from "react-jvectormap";
+import { VectorMap, getMapObject } from "react-jvectormap";
 import data from "./country-codes-lat-long-alpha3.json";
 
 
@@ -27,18 +27,18 @@ const Map = () => {
     const [markers, setMarkers] = useState([]);
     const [count_array, setcount_array] = useState([]);
     const [countries, setCountries] = useState([]);
-
+    const mapRef = useRef(null);
 
 
 
     useEffect(() => { // fetch countries data here .. only runs when the component mounts
         setTimeout(() => {
             const fetched_countries = [
-                { code: "DE", country: "Germany", count: 7 },
-                { code: "RU", country: "Russia", count: 10 },
-                { code: "US", country: "United States", count: 22 },
+                { code: "DE", country: "Germany", count: 5 },
+                { code: "RU", country: "Russia", count: 7 },
+                { code: "US", country: "United States", count: 13 },
                 { code: "FR", country: "France", count: 4 },
-                { code: "IT", country: "Italy", count: 33 },
+                { code: "IT", country: "Italy", count: 3 },
                 { code: "AU", country: "Austria", count: 2 },
                 { code: "EG", country: "Egypt", count: 50 },
             ]
@@ -48,12 +48,20 @@ const Map = () => {
             setcount_array(count_array)
         }
             , 1000)
+
+
+
+
+        setTimeout(() => { // for some reason this dosen't work if excuted directly after rendring
+            change_scale()
+        }
+            , 1000)
     }, [])
 
     const produce_markers = (countries, data) => {
         const markers = countries.map((entry) => {
             // console.log(data)
-            let obj = data.find(obj => obj.country == entry.country);
+            let obj = data.find(obj => obj.country === entry.country);
             let marker = { latLng: [obj.latitude, obj.longitude], name: `${entry.count} Alumini in ${obj.country}  ` }
             return marker
 
@@ -86,66 +94,71 @@ const Map = () => {
         }
     }
 
+    const change_scale = () => {
+        if (window.innerWidth < 900) {
+            var zoomSettings = { scale: 1.5, lat: 41.915720, lng: 12.438120, animate: true };
+            console.log('mapRef', mapRef.current.$mapObject)
+            mapRef.current.$mapObject.setFocus(zoomSettings);
+            console.log({ mapRef })
+        }
+    }
+
     return (
-        <VectorMap
-            markersSelectable={true}
-            markers={markers}
-            markerStyle={{
-                initial: {
-                    fill: '#26ADCB'
-                },
-                selected: {
-                    fill: '#CA0020'
-                }
-            }}
-            regionStyle={{
-                initial: {
-                    fill: '#B8E186'
-                },
-                selected: {
-                    fill: '#F4A582'
-                }
-            }}
-            series={{
-                markers: [{
-                    attribute: 'r',
-                    scale: [5, 8],
-                    values: count_array
-                }]
-            }}
+        <>
+
+            <VectorMap
+                ref={mapRef}
+                markersSelectable={true}
+                markers={markers}
+                markerStyle={{
+                    initial: {
+                        fill: '#26ADCB'
+                    },
+                    selected: {
+                        fill: '#CA0020'
+                    }
+                }}
+
+                series={{
+                    markers: [{
+                        attribute: 'r',
+                        scale: [5, 8],
+                        values: count_array
+                    }]
+                }}
 
 
-            onRegionTipShow={tip_handler}
-            map={"world_mill"}
-            backgroundColor="transparent" //change it to ocean blue: #0077be
-            zoomOnScroll={false}
-            containerStyle={{
-                width: "100%",
-                height: "100%"
-            }}
-            onRegionClick={handleClick} //gets the country code
-            containerClassName="map"
-            regionStyle={{
-                initial: {
-                    fill: "#c9c2c2",
-                    "fill-opacity": 0.9,
-                    stroke: "none",
-                    "stroke-width": 0,
-                    "stroke-opacity": 0
-                },
-                hover: {
-                    "fill-opacity": 0.8,
-                    cursor: "pointer"
-                },
-                selected: {
-                    fill: "#2938bc" //color for the clicked country
-                },
-                selectedHover: {}
-            }}
-            regionsSelectable={true}
+                onRegionTipShow={tip_handler}
+                map={"world_mill"}
+                backgroundColor="transparent" //change it to ocean blue: #0077be
+                zoomOnScroll={false}
+                containerStyle={{
+                    width: "100%",
+                    height: "100%"
+                }}
+                onRegionClick={handleClick} //gets the country code
+                containerClassName="map"
+                regionStyle={{
+                    initial: {
+                        fill: "#c9c2c2",
+                        "fill-opacity": 0.9,
+                        stroke: "none",
+                        "stroke-width": 0,
+                        "stroke-opacity": 0
+                    },
+                    hover: {
+                        "fill-opacity": 0.8,
+                        cursor: "pointer"
+                    },
+                    selected: {
+                        fill: "#2938bc" //color for the clicked country
+                    },
+                    selectedHover: {}
+                }}
+                regionsSelectable={true}
+            />
 
-        />
-
+        </>
     );
 };
 export default Map;

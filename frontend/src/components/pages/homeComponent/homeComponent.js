@@ -5,20 +5,16 @@ import news_image_3 from "./assets/unnamed.jpg"
 
 
 import React from 'react'
-import { Container, Col, Form, Row, FormGroup, Label, Input, Button } from 'reactstrap';
+import { Container, Col, Row } from 'reactstrap';
 import Network_diagramComponent from "./Network_diagramComponent/Network_diagramComponent"
 import zewail_image from './assets/zewail_image3.png'
-import helmy_image from './assets/helmy_image1.jpg'
 import grads from './assets/grads3.png'
 
 import logo from './assets/logo.png'
-import logo2 from './assets/logo2.png'
 import background_wave from './assets/hero4.png'
 
 
 
-import welcome_illustration from './assets/welcome_illustration.png'
-import { VectorMap } from "react-jvectormap"
 import MapComponent from "./MapComponent/MapComponent"
 import NewsCardComponent from "./NewsCardComponent/NewsCardComponent"
 import "./homeComponent.css"
@@ -26,8 +22,47 @@ import { Card, CardHeader, CardFooter, CardBody, CardTitle, CardText } from 'rea
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons'
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-export default function HomeComponent() {
+import { Link } from "react-router-dom";
+export default function HomeComponent(props) {
+
+
+
+    const render_news_cards = (news_posts) => {
+
+
+        let cards_view = news_posts.map((post, index) => {
+            const blocks = post.EditorData.blocks;
+            let thumbnailimage = process.env.REACT_APP_BACKEND_URL + '/logo.png'
+            for (const index in blocks) {
+
+                if (blocks[index].type === 'imageTool') {
+                    thumbnailimage = blocks[index].data.file.url
+                    break
+                }
+                else if (blocks[index].type === 'image') {
+                    thumbnailimage = blocks[index].data.url
+                    break
+
+                }
+            }
+            const Title = post.meta_values[0].Title;
+            const Date = post.meta_values[0].Date;
+            const thumbnail_text = post.meta_values[0].thumbnail_text;
+
+
+            return (
+                <Col key={post._id} xs="9" md="4" className="mt-5" >
+                    <NewsCardComponent img={thumbnailimage}
+                        title={Title}
+                        body_text={thumbnail_text}
+                        Date={Date}
+                        post_id={post._id}
+                    />
+                </Col>
+            )
+        })
+        return (cards_view)
+    }
 
 
     return (
@@ -36,7 +71,7 @@ export default function HomeComponent() {
             <div style={{ width: "100vw", overflow: "hidden" }} >
                 <img className="mb-5" style={{ width: "100%", overflow: "hidden", height: "auto", position: "absolute", transform: ' scale(1)' }} src={background_wave} id="c" alt="oval" />
             </div>
-            <Container id="aboutus_container" style={{ marginTop: "100px" }}>
+            <Container id="aboutus_container">
 
                 <Row id="vision_row" className="m-t-5 justify-content-center" style={{ marginTop: "30px" }}>
                     <Col xs={{ size: 10, order: 2 }} md={{ size: 6, order: 0 }} className="" style={{ display: "flex", textAlign: "left", justifyContent: "center", flexDirection: "column" }}>
@@ -52,7 +87,7 @@ export default function HomeComponent() {
                     </Col>
 
                     <Col xs={{ size: 11, order: 0 }} md={{ size: 6, order: 2 }} className="d-flex">
-                        <img className="mb-5 ml-md-auto ml-auto mr-auto mr-md-0" style={{ width: "70%", height: "auto" }} src={zewail_image} id="c" alt="oval" />
+                        <img className="mb-5 ml-md-auto ml-auto mr-auto mr-md-0" style={{ width: "70%", height: "auto" }} src={zewail_image} id="zewail_image" alt="oval" />
                     </Col>
 
 
@@ -99,25 +134,10 @@ export default function HomeComponent() {
 
                 </Row>
                 <Row className="justify-content-center">
-                    <Col xs="9" md="4" className="mt-5" >
-                        <NewsCardComponent img={news_image_3}
-                            title="Zewail City Students Win Biotechnology Competition"
-                            body_text="For the second time in a row, University of Science and Technology students achieved the first place in the Science Operations Leaders in Egypt (SOLE) competition which took place September 12, 2015 at the Faculty of Agriculture, Ain Shams University."
-                        />
-                    </Col>
-                    <Col xs="9" md="4" className="mt-5" >
-                        <NewsCardComponent img={news_image_2} title="Zewail City Wins Shell’s National Imagine the Future Competition"
-                            body_text="Students of Zewail City of Science and Technology (ZU12) won the first place in Shell’s national Imagine the Future competition 2019-2020.”"
-                        />
-                    </Col>
-                    <Col xs="9" md="4" className="mt-5">
-                        <NewsCardComponent img={news_image_1} title="New Campus Development"
-                            body_text="Former Egyptian President Adly Mansour issued decree 115 on April 9, 2014, granting 198 acres to Zewail City for the construction of the new campus in the October Gardens of 6th of October City.
-
-                        President Abdel Fattah al-Sisi decreed that the new campus be built by the Engineering Authority of the Egyptian Armed Forces and inaugurated in a one-year time frame. The University of Science and Technology in Zewail City  and Research Institutes are now fully operational at current campus in October Gardens. A team of prominent architects"
-                        />
-                    </Col>
-
+                    {
+                        props.news_state.NewsFetchedSuccessfully &&
+                        render_news_cards(props.news_state.News)
+                    }
                 </Row>
             </Container>
             <Container id="shadow_container_1" fluid style={{ marginTop: "100px" }}>

@@ -38,6 +38,33 @@ export default class NewsComponent extends Component {
                         <Row>
                             <Col id="categories_col" md={3}>
 
+
+                                <div
+                                    style={{
+                                        textAlign: "left",
+                                        marginTop: "30px",
+                                        marginBottom: "0px",
+                                        borderBottomStyle: 'solid',
+                                        borderBottomWidth: "0.5px",
+                                        borderBottomColor: " #C5BCBC"
+                                    }} className="category_head"
+                                >
+                                    Categories
+                                </div>
+                                <div
+                                    style={{
+                                        textAlign: "left",
+                                        marginLeft: "20px",
+                                        marginTop: "10px",
+                                        marginBottom: "50px",
+                                        borderBottomStyle: 'solid',
+                                        borderBottomWidth: "0.5px",
+                                        borderBottomColor: " #C5BCBC"
+                                    }} className="category"
+                                >
+                                    General
+                                </div>
+
                             </Col>
                             <Col id="news_cards_row" md={9}>
                                 {

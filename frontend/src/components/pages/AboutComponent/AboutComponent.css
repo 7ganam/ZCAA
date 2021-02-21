@@ -9,3 +9,19 @@
     /* primary400 */
     color: #0091AC;
 }
+
+.mission_vison_text{
+    max-height: 395px;
+    overflow: auto;
+}
+
+
+
+@include media-breakpoint-up(sm) {  }
+@include media-breakpoint-up(md) {
+     .mission_vison_text{
+    max-height:auto;
+} }
+@include media-breakpoint-up(lg) { }
+@include media-breakpoint-up(xl) { }
+@include media-breakpoint-up(xxl) {  }

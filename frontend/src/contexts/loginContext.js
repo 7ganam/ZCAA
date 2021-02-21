@@ -22,9 +22,7 @@ export const LoginContextProvider = ({ children }) => {
         setToken(token)
         setUser(input_user)
         setExpirateion_date_string(expirateion_date_string)
-        console.log('setstorage', setstorage)
         if (setstorage) {
-            console.log('setstorage', setstorage)
             localStorage.setItem(
                 'userData',
                 JSON.stringify({

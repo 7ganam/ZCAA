@@ -44,7 +44,7 @@ export default function AboutComponent() {
                 <Row style={{ marginTop: "60px", marginBottom: "10px" }}>
                     <Col md="9">
                         <span id='about_header' >OUR  mission:</span>
-                        <div id="mission_text">               Our mission is supporting Zewail City in its pursuit of excellence and building a place for
+                        <div id="mission_text" className="mission_vison_text">               Our mission is supporting Zewail City in its pursuit of excellence and building a place for
                         the Alumni to keep ties with their alma mater by supporting their needs, elevating their
                         connections, and assisting their career’s development. As Zewail City’s alumni
                         association, we are intrigued to do our duties as Zewail City’s advocates for alumni in
@@ -68,7 +68,7 @@ export default function AboutComponent() {
                     </Col>
                     <Col md="9">
                         <span id='about_header' >OUR  vision:</span>
-                        <div id="mission_text">               The current ZCAA vision follows Ahmed Zewail’s  eagerness to contribute to the
+                        <div id="mission_text" className="mission_vison_text">               The current ZCAA vision follows Ahmed Zewail’s  eagerness to contribute to the
                         Egyptian community through propagation of knowledge. The motivation that Zewail
                         inspired to the growing ZC community was reflected in substantial achievements. Many
                         ZC Alumni joined reputable institutions all over the world where their knowledge

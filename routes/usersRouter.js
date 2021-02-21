@@ -77,6 +77,7 @@ const verify_google_email = (req, res, next) => { // verifies the email used to 
       exp_field: req.body.form_state.exp_field,
       new_exp_field: req.body.form_state.new_exp_field,
       residency: req.body.form_state.residency,
+      birth_date: req.body.form_state.birth_date,
       content: req.body.form_state.content,
       phone: req.body.form_state.phone,
       birth_day: req.body.form_state.birth_day,

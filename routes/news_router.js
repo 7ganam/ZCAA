@@ -60,16 +60,16 @@ news_router.route('/news_posts')
             .then((newsposts) => {
                 res.statusCode = 200;
                 res.setHeader('Content-Type', 'application/json');
-                res.json(newsposts);
+                res.json(newsposts.reverse());
             }, (err) => next(err))
             .catch((err) => next(err));
     })
 
-news_router.route('/news_posts/:dishId')
+news_router.route('/news_posts/:postId')
     .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
     .delete(cors.corsWithOptions,
         (req, res, next) => {
-            NewsPosts.findByIdAndRemove(req.params.dishId)
+            NewsPosts.findByIdAndRemove(req.params.postId)
                 .then((resp) => {
                     res.statusCode = 200;
                     res.setHeader('Content-Type', 'application/json');

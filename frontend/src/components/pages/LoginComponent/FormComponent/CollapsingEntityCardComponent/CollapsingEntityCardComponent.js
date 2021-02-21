@@ -125,6 +125,8 @@ function CollapsingEntityCardComponent(props) {
                                                     id={`entities[${index}].start_date`}
                                                     {...field}
                                                     selected={value}
+                                                    dateFormat="MM/yyyy"
+                                                    showMonthYearPicker
                                                     onChange={val => setFieldValue(`entities[${index}].start_date`, val)}
                                                 />
                                             )
@@ -154,6 +156,8 @@ function CollapsingEntityCardComponent(props) {
                                                     id={`entities[${index}].end_date`}
                                                     {...field}
                                                     selected={value}
+                                                    dateFormat="MM/yyyy"
+                                                    showMonthYearPicker
                                                     onChange={val => setFieldValue(`entities[${index}].end_date`, val)}
                                                 />
                                             )

@@ -59,12 +59,16 @@ function NewsCardComponenet(props) {
             thumbnailimage = blocks[index].data.file.url
             break
         }
+        else if (blocks[index].type === 'image') {
+            thumbnailimage = blocks[index].data.url
+            break
+
+        }
     }
 
     const title = props.post.meta_values[0].Title
     const thumbnailText = props.post.meta_values[0].thumbnail_text
-    const category = "random category"
-
+    const category = "general"
     const Date = props.post.meta_values[0].Date;
 
 
@@ -109,7 +113,7 @@ function NewsCardComponenet(props) {
                                 {thumbnailText}
                             </div>
                         </div>
-                        <div id="news_card_footer" style={{ height: "27px", marginTop: "5px", display: "flex", alignItems: "center" }} >
+                        <div id="news_card_footer" >
                             {
                                 !!Token && Token.admin &&
                                 <div style={{}} >

@@ -4,3 +4,10 @@ a, a:hover, a:focus, a:active {
     text-decoration: none;
     color: inherit;
 }
+
+.category_head{
+    text-transform: uppercase;
+    font-family: 'Philosopher', sans-serif;
+    font-size: 30px;
+    color: #00505F;
+}

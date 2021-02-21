@@ -120,13 +120,8 @@ const User = new Schema({
         type: String,
         // required: true
     },
-    birth_day: {
+    birth_date: {
         type: String,
-        // required: true
-    },
-    birth_year: {
-        type: String,
-        // required: true
     },
     address: {
         type: String,

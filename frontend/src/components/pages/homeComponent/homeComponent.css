@@ -153,6 +153,12 @@
 
 /*  Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) { 
+    #aboutus_container{
+        margin-top: 100px;
+    
+
+    }
+
     #welcome_title{
         text-align: left;
         font-size: 60px;

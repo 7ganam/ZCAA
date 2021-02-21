@@ -22,6 +22,7 @@ import { Modal, ModalBody } from 'reactstrap';
 import GooglebtnComponent from './GooglebtnComponent/GooglebtnComponent'
 import ReactLoading from 'react-loading';
 
+import DateView from 'react-datepicker'
 
 
 
@@ -38,9 +39,7 @@ const SignupSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email'),
     exp_field: Yup.string().required('Required'),
     phone: Yup.number("must be a number").positive("positive numbers only ").integer("integers only"),
-    birth_day: Yup.number("must be a number").min(1, 'Too Short!').max(31, 'not a day number').required('Required'),
-    birth_month: Yup.number("must be a number").min(1, 'Too Short!').max(12, 'not a month number').required('Required'),
-    birth_year: Yup.number("must be a number").min(1980, '1980 min').required('Required'),
+    birth_date: Yup.string().required('Required'),
     address: Yup.string().required('Required'),
     zc_id: Yup.number("must be a number").min(201300000, '201300000 min').required('Required'),
     grad_year: Yup.number("must be a number").min(2018, '2018 min').required('Required'),
@@ -123,7 +122,8 @@ const FormComponent = (props) => {
             validationSchema={SignupSchema}
             innerRef={formRef}
             initialValues={{
-                first_name: '', last_name: '', email: '', exp_field: '', new_exp_field: '', residency: { country: "", region: "" }, content: '', phone: '', birth_day: '', birth_month: '', birth_year: '', address: '', zc_id: '', grad_year: '', major: '', minor: '', other_undergraduate_data: '', universities: ['', ''], entities: ['', '']
+                birth_date: '',
+                first_name: '', last_name: '', email: '', exp_field: '', new_exp_field: '', residency: { country: "", region: "" }, content: '', phone: '', address: '', zc_id: '', grad_year: '', major: '', minor: '', other_undergraduate_data: '', universities: ['', ''], entities: ['', '']
             }}
             onSubmit={
                 (values) => { toggle() } // just show the google modal on submit ... it will call the submit function when google authenticate
@@ -161,7 +161,7 @@ const FormComponent = (props) => {
                                                         lineHeight: '125.5%', textAlign: 'center', textTransform: 'uppercase',
                                                         color: '#BDD7DB', fontFamily: "Cairo", fontStyle: 'normal', fontWeight: 'bold',
                                                     }}>
-                                                        <div style={{ color: "#0091AC", marginTop: "30px", }}>
+                                                        <div style={{ color: "rgb(173, 227, 237)", marginTop: "30px", }}>
                                                             Welocme
                                                     </div>
                                                         <div>
@@ -254,7 +254,7 @@ const FormComponent = (props) => {
                                                     <Col lg="8">
                                                         <div className="form-group" style={{ width: "100%" }}>
                                                             <label htmlFor="email" className="form_text" style={{ letterSpacing: '0.2em' }}>prefered email for communication
-                                                             <span style={{ color: "#0091AC", fontWeight: "bolder", fontSize: "11" }}>{" (Optional)"}</span>
+                                                             <span style={{ color: "rgb(173, 227, 237)", fontWeight: "bolder", fontSize: "11" }}>{" (Optional)"}</span>
                                                             </label>
                                                             <Field name="email" className="form-control in_field " type="email" />
                                                             <ErrorMessage name='email' component={TextError} />
@@ -271,37 +271,38 @@ const FormComponent = (props) => {
 
                                                 </Row>
                                                 <Row className="justify-content-end">
-                                                    <Col xs="10" lg="2" >
-                                                        <div className="form-group my-0" style={{ width: "100%" }}>
-                                                            <label htmlFor="birth_day" className="form_text2">Day</label>
-                                                            <Field name="birth_day" className="form-control in_field" type="text" />
-                                                            <ErrorMessage name='birth_day' component={TextError} />
-
-                                                        </div>
-                                                    </Col>
-                                                    <Col xs="10" lg="2" >
-                                                        <div className="form-group my-0" style={{ width: "100%" }}>
-                                                            <label htmlFor="birth_month" className="form_text2">month</label>
-                                                            <Field name="birth_month" className="form-control in_field" type="text" />
-                                                            <ErrorMessage name='birth_month' component={TextError} />
-
-                                                        </div>
-                                                    </Col>
-                                                    <Col xs="10" lg="2" >
-                                                        <div className="form-group my-0" style={{ width: "100%" }}>
-                                                            <label htmlFor="birth_year" className="form_text2">year</label>
-                                                            <Field name="birth_year" className="form-control in_field" type="text" />
-                                                            <ErrorMessage name='birth_year' component={TextError} />
-
-                                                        </div>
-
+                                                    <Col lg="8">
+                                                        <Field name={`birth_date`} className="form-control in_field" >
+                                                            {({ form, field }) => {
+                                                                const { setFieldValue } = form
+                                                                const { value } = field
+                                                                return (
+                                                                    <DateView className="form-control in_field"
+                                                                        style={{
+                                                                            textAlign: "end"
+                                                                        }}
+                                                                        id={`birth_date`}
+                                                                        {...field}
+                                                                        selected={value}
+                                                                        peekNextMonth
+                                                                        showMonthDropdown
+                                                                        showYearDropdown
+                                                                        dropdownMode="select"
+                                                                        onChange={val => setFieldValue(`birth_date`, val)}
+                                                                    />
+                                                                )
+                                                            }}
+                                                        </Field>
+                                                        <ErrorMessage name='birth_date' component={TextError} />
                                                     </Col>
                                                 </Row>
-                                                <Row className="justify-content-end mt-5">
+
+
+                                                <Row className="justify-content-end mt-3">
                                                     <Col lg="8">
                                                         <div className="form-group" style={{ width: "100%" }}>
                                                             <label htmlFor="phone" className="form_text">phone
-                                            <span style={{ color: "#0091AC", fontWeight: "bolder", fontSize: "11" }}>{" (Optional)"}</span>
+                                            <span style={{ color: "rgb(173, 227, 237)", fontWeight: "bolder", fontSize: "11" }}>{" (Optional)"}</span>
                                                             </label>
                                                             <Field name="phone" className="form-control in_field" type="text" />
                                                             <ErrorMessage name='phone' component={TextError} />
@@ -427,7 +428,7 @@ const FormComponent = (props) => {
                                                     <Col lg="4">
                                                         <div className="form-group" style={{ width: "100%" }}>
                                                             <label htmlFor="minor" className="form_text">minor
-                                            <span style={{ color: "#0091AC", fontWeight: "bolder", fontSize: "11" }}>{" (Optional)"}</span>
+                                            <span style={{ color: "rgb(173, 227, 237)", fontWeight: "bolder", fontSize: "11" }}>{" (Optional)"}</span>
                                                             </label>
                                                             <Field name="minor" as="select" className="form-control in_field">
                                                                 <option value="">Select minor</option>
@@ -448,7 +449,7 @@ const FormComponent = (props) => {
                                                     <Col lg="8">
                                                         <div className="form-group" style={{ width: "100%" }}>
                                                             <label htmlFor="other_undergraduate_data" className="form_text">Others
-                                            <span style={{ color: "#0091AC", fontWeight: "bolder", fontSize: "11" }}>{" (Optional)"}</span>
+                                            <span style={{ color: "rgb(173, 227, 237)", fontWeight: "bolder", fontSize: "11" }}>{" (Optional)"}</span>
                                                             </label>
                                                             <Field name="other_undergraduate_data" className="form-control in_field" type="text" />
                                                         </div>
@@ -520,7 +521,7 @@ const FormComponent = (props) => {
                                                                             return (
                                                                                 <div>
                                                                                     {universities.map((phNumber, index) => (
-                                                                                        <div className="d-flex mt-5 mx-4 mt-lg-4 mx-lg-0">
+                                                                                        <div className="d-flex mt-5  mt-lg-4 mx-lg-0">
                                                                                             <div key={index} style={{ width: "100%" }}>
                                                                                                 <CollapsingCardComponent index={index} remove={remove} />
                                                                                             </div>

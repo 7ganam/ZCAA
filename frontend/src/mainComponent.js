@@ -41,21 +41,19 @@ export default function MainComponent() {
                 }
             })
             .then((responseJson) => {
+                setNews(responseJson) // set this first before you set the successs flag
                 setNewsFetchedSuccessfullys(true);
-                setNews(responseJson)
-                console.log({ responseJson })
             })
             .catch((error) => {
                 console.log(error)
+                setFetchingNewsError(error || "something went wrong")
                 setNewsFetchedSuccessfullys(false);
-                setFetchingNewsError(error)
             });
     }
 
     const check_if_logged_in = () => {
         const storedData = JSON.parse(localStorage.getItem('userData'));
         if (storedData && storedData.token) {
-            console.log(storedData.token)
             login(storedData.token, storedData.user, storedData.expirateion_date_string, false);
         }
     }
@@ -78,7 +76,6 @@ export default function MainComponent() {
         }
         else {
             let filtered_News = props.news_state.News.filter((post) => post._id === props.match.params.post_id)
-            console.log({ filtered_News })
             return (
                 <NewsPostViewComponent
                     news_state={{ NewsFetchedSuccessfully, FetchingNewsError, News: filtered_News }}
@@ -101,7 +98,7 @@ export default function MainComponent() {
                     {/* the navbar has to be inside the router since it uses LINK component which runs only inside router component */}
 
                     <Route exact path="/">
-                        <HomeComponent />
+                        <HomeComponent news_state={{ NewsFetchedSuccessfully, FetchingNewsError, News: News.slice(0, 3) }} />
                     </Route>
                     <Route exact path="/ABOUTUS">
                         <AboutComponent />

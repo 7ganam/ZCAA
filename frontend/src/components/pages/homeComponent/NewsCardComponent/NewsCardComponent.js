@@ -5,6 +5,9 @@ import {
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle,
 } from 'reactstrap';
+import moment from 'moment';
+import { Link } from "react-router-dom";
+
 import "./NewsCardComponent.css"
 const NewsCardComponent = (props) => {
     return (
@@ -14,18 +17,20 @@ const NewsCardComponent = (props) => {
                 <CardImg top style={{ objectFit: "cover", height: "200px", width: "95%", marginTop: "7px", borderRadius: "12px" }} src={props.img} alt="Card image cap" />
                 <CardBody style={{ width: "100%" }}>
                     <CardTitle tag="h5" style={{ fontSize: "18px" }}>{props.title}</CardTitle>
-                    <CardSubtitle id="card_sub" tag="h6" style={{ fontSize: "12px" }} className="mb-2 text-muted">September 14, 2015</CardSubtitle>
+                    <CardSubtitle id="card_sub" tag="h6" style={{ fontSize: "12px" }} className="mb-2 text-muted"> {moment(props.Date).format('DD / MMMM / YYYY')}</CardSubtitle>
                     <CardText id="card_body_text" style={{ width: "100%", color: "grey" }}>
                         <div>
                             {props.body_text}
                         </div>
                     </CardText>
-                    <div className="d-flex">
-                        <div className="zcaa_link" style={{ marginLeft: "auto" }}>
-                            read more
+                    <Link to={`/NEWS/${props.post_id}`} >
+                        <div className="d-flex">
+                            <div className="zcaa_link" style={{ marginLeft: "auto" }}>
+                                read more
                             <FontAwesomeIcon icon={faLongArrowAltRight} className="ml-1 pt-1" />
+                            </div>
                         </div>
-                    </div>
+                    </Link>
                 </CardBody>
             </Card>
         </div>
