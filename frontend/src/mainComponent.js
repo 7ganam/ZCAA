@@ -103,7 +103,7 @@ export default function MainComponent() {
                     {/* the navbar has to be inside the router since it uses LINK component which runs only inside router component */}
                     <Network_diagramComponent logo_img={logo} />
                     <div style={{ width: "100vw", overflow: "hidden" }} >
-                        <img className="mb-5" style={{ width: "100%", overflow: "hidden", height: "auto", position: "absolute", transform: ' scale(1)' }} src={background_wave} id="c" alt="oval" />
+                        <img className="mb-5" style={{ width: "100%", overflow: "hidden", height: "auto", position: "absolute", transform: ' scale(1)', zIndex: "-100" }} src={background_wave} id="c" alt="oval" />
                     </div>
                     <Route exact path="/">
                         <HomeComponent news_state={{ NewsFetchedSuccessfully, FetchingNewsError, News: News.slice(0, 3) }} />
