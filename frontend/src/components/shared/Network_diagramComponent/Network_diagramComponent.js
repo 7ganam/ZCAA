@@ -3,6 +3,7 @@ import { React, useEffect } from 'react'
 import initJParticle from "./jparticle.jquery"
 import $ from "jquery";
 import "./Network_diagramComponent.css"
+import { withRouter } from 'react-router-dom';
 
 
 
@@ -131,9 +132,9 @@ const draw_glope = () => {
 
 
 
-export default function Network_diagramComponent(props) {
+function Network_diagramComponent(props) {
     initJParticle($)
-
+    console.dir(props.location.pathname === "/")
     useEffect(() => {
 
         var w = window,
@@ -151,7 +152,6 @@ export default function Network_diagramComponent(props) {
 
         });
 
-        console.log("rendered")
         draw_glope()
         return function cleanup() {
 
@@ -159,7 +159,11 @@ export default function Network_diagramComponent(props) {
         };
     }, [])
     return (
-        <div id="network_div" style={{ position: 'relative', height: "608px", backgroundColor: "#CCE6EB", display: "flex", justifyContent: "center", alignItems: "center", boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)' }}>
+        <div id="network_div" style={{
+            position: 'relative', height: "608px", backgroundColor: "#CCE6EB", display: "flex", justifyContent: "center",
+            display: props.location.pathname !== "/" ? "none" : "flex",
+            alignItems: "center", boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)'
+        }}>
             <img style={{ width: "auto", height: "200px", position: 'absolute', filter: 'drop-shadow(0px 5px 4px rgba(0, 0, 0, 0.25)) ' }} src={props.logo_img} id="c" alt="oval" />
             <div id="network_card" style={{ position: "absolute" }}>
                 <div id="network_card_div">
@@ -175,3 +179,6 @@ export default function Network_diagramComponent(props) {
         </div>
     )
 }
+
+
+export default withRouter(Network_diagramComponent);

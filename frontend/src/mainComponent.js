@@ -17,6 +17,11 @@ import AdminComponent from "./components/pages/AdminComponent/AdminComponent"
 import NewsPostViewComponent from "./components/pages/NewsComponent/NewsPostViewComponent/NewsPostViewComponent"
 import LoginModalComponenet from "./components/shared/LoginModalComponenet/LoginModalComponenet"
 
+import Network_diagramComponent from "./components/shared/Network_diagramComponent/Network_diagramComponent"
+import background_wave from './hero4.png'
+import logo from './assets/logo.png'
+
+
 export default function MainComponent() {
     const { login, logout } = useContext(LoginContext);
 
@@ -96,7 +101,10 @@ export default function MainComponent() {
                     <ScrollToTopComponent />
                     <NavbarComponent />
                     {/* the navbar has to be inside the router since it uses LINK component which runs only inside router component */}
-
+                    <Network_diagramComponent logo_img={logo} />
+                    <div style={{ width: "100vw", overflow: "hidden" }} >
+                        <img className="mb-5" style={{ width: "100%", overflow: "hidden", height: "auto", position: "absolute", transform: ' scale(1)' }} src={background_wave} id="c" alt="oval" />
+                    </div>
                     <Route exact path="/">
                         <HomeComponent news_state={{ NewsFetchedSuccessfully, FetchingNewsError, News: News.slice(0, 3) }} />
                     </Route>

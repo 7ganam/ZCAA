@@ -97,9 +97,9 @@ const Map = () => {
     const change_scale = () => {
         if (window.innerWidth < 900) {
             var zoomSettings = { scale: 1.5, lat: 41.915720, lng: 12.438120, animate: true };
-            console.log('mapRef', mapRef.current.$mapObject)
-            mapRef.current.$mapObject.setFocus(zoomSettings);
-            console.log({ mapRef })
+            // console.log('mapRef', mapRef.current.$mapObject)
+            if (!!mapRef.current) { mapRef.current.$mapObject.setFocus(zoomSettings); }
+            // console.log({ mapRef })
         }
     }
 

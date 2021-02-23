@@ -68,10 +68,10 @@ export default function HomeComponent(props) {
 
     return (
         <React.Fragment className='p-0'>
-            <Network_diagramComponent logo_img={logo} />
+            {/* <Network_diagramComponent logo_img={logo} />
             <div style={{ width: "100vw", overflow: "hidden" }} >
                 <img className="mb-5" style={{ width: "100%", overflow: "hidden", height: "auto", position: "absolute", transform: ' scale(1)' }} src={background_wave} id="c" alt="oval" />
-            </div>
+            </div> */}
             <Container id="aboutus_container">
 
 

@@ -25,8 +25,8 @@ app.use(cors()) // use this before route handlers
 
 
 // connect to mongodb--------------------------------------------------------
-console.log(process.env.MONGODB_URI)
-mongoose.connect(process.env.MONGODB_URI, () => { console.log('connected to mongodb'); });
+console.log(process.env.MONGODB_URI2)
+mongoose.connect(process.env.MONGODB_URI2, () => { console.log('connected to mongodb'); });
 
 
 
