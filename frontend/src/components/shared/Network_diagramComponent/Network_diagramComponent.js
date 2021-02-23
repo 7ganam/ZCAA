@@ -170,7 +170,7 @@ function Network_diagramComponent(props) {
                     <div id="network_card_text">connecting alumini around the world</div>
                     <div id="globe_wrapper">
                         <canvas id='rotatingGlobe' width='400' height='400'
-                            style={{ width: '40px', height: '40px', cursor: 'move', marginRight: "15px" }}
+                            style={{ width: '40px', height: '40px', cursor: 'move' }}
                         >
                         </canvas>
                     </div>
