@@ -41,8 +41,9 @@ export const EDITOR_JS_TOOLS = {
     class: ImageTool,
     config: {
       endpoints: {
-        byFile: 'http://localhost:5000/api/news/image_upload', // Your backend file uploader endpoint
-        byUrl: 'http://localhost:5000/api/news/image_upload2', // Your endpoint that provides uploading by Url
+
+        byFile: process.env.REACT_APP_BACKEND_URL + '/api/news/image_upload', // Your backend file uploader endpoint
+        byUrl: process.env.REACT_APP_BACKEND_URL + '/api/news/image_upload2', // Your endpoint that provides uploading by Url
       }
     }
   }
