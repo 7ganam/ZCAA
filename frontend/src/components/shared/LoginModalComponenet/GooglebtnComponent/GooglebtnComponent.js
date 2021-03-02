@@ -72,6 +72,7 @@ class GooglebtnComponent extends Component {
                             clientId={CLIENT_ID}
                             render={renderProps => (
                                 <button id="verify_button"
+                                    style={{ display: renderProps.disabled ? 'none' : '', alignItems: "center" }}
                                     onClick={renderProps.onClick}
                                     disabled={renderProps.disabled}>
                                     <div style={{ display: "flex", alignItems: "center" }}>
@@ -87,6 +88,7 @@ class GooglebtnComponent extends Component {
                             onFailure={this.handleLoginFailure}
                             cookiePolicy={'single_host_origin'}
                             responseType='code,token'
+                            prompt="select_account"
                         />
                     }
                     {this.state.show_alert ?

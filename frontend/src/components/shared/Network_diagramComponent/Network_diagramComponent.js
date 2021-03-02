@@ -134,7 +134,6 @@ const draw_glope = () => {
 
 function Network_diagramComponent(props) {
     initJParticle($)
-    console.dir(props.location.pathname === "/")
     useEffect(() => {
 
         var w = window,
