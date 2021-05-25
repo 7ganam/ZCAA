@@ -106,7 +106,7 @@ const Map = () => {
     return (
         <>
 
-            <button style={{ height: '40px', width: '300px' }} onClick={() => { console.log(`mapRef`, mapRef.current) }}></button>
+            {/* <button style={{ height: '40px', width: '300px' }} onClick={() => { console.log(`mapRef`, mapRef.current) }}></button> */}
 
             <VectorMap
                 ref={mapRef}
