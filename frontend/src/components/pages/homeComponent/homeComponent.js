@@ -1,26 +1,12 @@
-import news_image_1 from "./assets/WhatsApp-Image-2019-09-09-at-11.54.56-AM.jpeg"
-import news_image_2 from "./assets/nationalfinals-egypt-1.jpg"
-import news_image_3 from "./assets/unnamed.jpg"
-
-
 
 import React from 'react'
 import { Container, Col, Row } from 'reactstrap';
-import Network_diagramComponent from "./Network_diagramComponent/Network_diagramComponent"
 import zewail_image from './assets/zewail_image3.png'
 import grads from './assets/grads3.png'
-
-import logo from './assets/logo.png'
-
-import background_wave from './assets/hero4.png'
-
-
-
 import MapComponent from "./MapComponent/MapComponent"
 import NewsCardComponent from "./NewsCardComponent/NewsCardComponent"
 import "./homeComponent.css"
-import { Card, CardHeader, CardFooter, CardBody, CardTitle, CardText } from 'reactstrap';
-
+import { Card, CardHeader, CardBody, CardTitle, } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons'
 import { Link } from "react-router-dom";
@@ -67,6 +53,7 @@ export default function HomeComponent(props) {
 
 
     return (
+
         <React.Fragment className='p-0'>
             {/* <Network_diagramComponent logo_img={logo} />
             <div style={{ width: "100vw", overflow: "hidden" }} >
@@ -120,6 +107,7 @@ export default function HomeComponent(props) {
                 </Row>
 
             </Container>
+
             <Container id="featured_news_container" className="" style={{ marginTop: "10px" }}>
 
                 <Row>
@@ -145,9 +133,11 @@ export default function HomeComponent(props) {
                     }
                 </Row>
             </Container>
+
             <Container id="shadow_container_1" fluid style={{ marginTop: "100px" }}>
 
             </Container>
+
             <Container id="welcome_container" fluid className="mx-0" >
                 {/* <img id="welcome_illustration" src={welcome_illustration} alt="oval" /> */}
                 <Container>
@@ -177,11 +167,13 @@ export default function HomeComponent(props) {
 
                 </Container>
             </Container>
+
             <Container id="map_container" fluid className="">
                 <div id="map_wrapper">
                     <MapComponent />
                 </div>
             </Container>
+
         </React.Fragment>
 
     )

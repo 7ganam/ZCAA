@@ -98,13 +98,15 @@ const Map = () => {
         if (window.innerWidth < 900) {
             var zoomSettings = { scale: 1.5, lat: 41.915720, lng: 12.438120, animate: true };
             // console.log('mapRef', mapRef.current.$mapObject)
-            if (!!mapRef.current) { mapRef.current.$mapObject.setFocus(zoomSettings); }
+            // if (!!mapRef.current) { mapRef.current.$mapObject.setFocus(zoomSettings); }
             // console.log({ mapRef })
         }
     }
 
     return (
         <>
+
+            <button style={{ height: '40px', width: '300px' }} onClick={() => { console.log(`mapRef`, mapRef.current) }}></button>
 
             <VectorMap
                 ref={mapRef}
